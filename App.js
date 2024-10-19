@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStaticNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { MD3LightTheme, PaperProvider } from "react-native-paper";
+import LoginScreen from "./screens/Screen1";
+import ElectronicsScreen from "./screens/Screen2";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Screen1: LoginScreen,
+    Screen2: ElectronicsScreen,
   },
 });
+
+const Navigation = createStaticNavigation(RootStack);
+export default function App() {
+  return (
+    <PaperProvider theme={MD3LightTheme}>
+      <Navigation />
+    </PaperProvider>
+  );
+}
